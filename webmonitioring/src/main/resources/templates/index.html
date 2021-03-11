@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>WebMonitor</title>
+<meta http-equiv="refresh" content="5" >
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div>
+		<h3 align="center">Welcome to <font color="green">  F-Secure </font>Assignment Web Monitoring
+			Tool by <a href="https://www.linkedin.com/in/nikhil-karn-b8588870/" target="_blank"><u>NIKHIL KARN</u></a></h3>				
+		</div>
+	</div>
+
+	<div>
+		<table class="table table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col" style="text-align: center;">Web Request Time</th>
+					<th scope="col" style="text-align: center;">Web URL</th>
+					<th scope="col" style="text-align: center;">Page Content To
+						Verify</th>
+					<th scope="col" style="text-align: center;">Web Response
+						Status</th>
+					<th scope="col" style="text-align: center;">Web Response Time
+						(in second)</th>
+					<th scope="col" style="text-align: center;">Page Content
+						Found?</th>
+				</tr>
+			</thead>
+			<tr th:each="monitorResult: ${result}">
+				<td scope="row" style="text-align: center;"
+					th:text="${monitorResult.getRequestTime()}"></td>
+				<td scope="row" style="text-align: center;">
+					<a th:href="${monitorResult.getUrl()}" th:text="${monitorResult.getUrl()}" target="_blank"/>
+				<td scope="row" style="text-align: center;"
+					th:text="${monitorResult.getPageContent()}"></td>
+				<td scope="row" style="text-align: center;">
+					<span th:if="${monitorResult.getStatusCode()==200}"><b style="color: green;" th:text="${monitorResult.getStatusCode()}"></b></span>
+      				<span th:unless="${monitorResult.getStatusCode()==200}"><b style="color: red;" th:text="${monitorResult.getStatusCode()}"></b></span>
+				</td>
+				<td scope="row" style="text-align: center;"
+					th:text="${monitorResult.getResponseTime()}"></td>
+				<td scope="row" style="text-align: center;">
+					<span th:if="${monitorResult.isPageContentFound()==true}"><b style="color: green;" th:text="${monitorResult.isPageContentFound()}"></b></span>
+      				<span th:unless="${monitorResult.isPageContentFound()==true}"><b style="color: red;" th:text="${monitorResult.isPageContentFound()}"></b></span>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+</html>
